@@ -49,6 +49,7 @@ class Device
       "crypto_dukpt_slot"           => "",
       "ctls"                        => "",
       "locale"                      => "en",
+      "heartbeat"                   => "",
       "company_name"                => ""
     }
 
