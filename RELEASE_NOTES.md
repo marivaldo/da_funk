@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.13 - 2016-11-22
+
+- Add support to Device::Setting#heartbeat.
+
 ### 0.7.12 - 2016-10-14
 
 - Bug fix Crypto class check.
