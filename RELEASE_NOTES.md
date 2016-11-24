@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.14 - 2016-11-24
+
+- Implement a way to disable StatusBar management by DaFunk.
+
 ### 0.7.13 - 2016-11-22
 
 - Add support to Device::Setting#heartbeat.
