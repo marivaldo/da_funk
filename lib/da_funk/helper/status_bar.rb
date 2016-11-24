@@ -35,7 +35,7 @@ module DaFunk
       }
 
       class << self
-        attr_accessor :status_timeout, :signal, :battery, :power
+        attr_accessor :status_timeout, :signal, :battery, :power, :managment
       end
 
       def self.check
@@ -92,8 +92,9 @@ module DaFunk
       end
 
       self.status_timeout ||= Time.now
+      self.managment      ||= true
       def self.valid?
-        if self.status_timeout < Time.now
+        if self.status_timeout < Time.now && self.managment
           self.status_timeout = Time.now + STATUS_TIMEOUT
           true
         end
