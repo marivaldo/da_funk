@@ -31,7 +31,7 @@ module ISO8583
 
       # make sure we have enough data ...
       if raw_value.length != len
-        mes = "Field has incorrect length! field: #{raw_value} len/expected: #{raw_value.length}/#{len}"
+        mes = "Field (#{name}) has incorrect length! field: #{raw_value} len/expected: #{raw_value.length}/#{len}"
         raise ISO8583ParseException.new(mes)
       end
 
