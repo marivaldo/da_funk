@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.15 - 2016-12-01
+
+- More descriptive ISO8583 exception including field name.
+
 ### 0.7.14 - 2016-11-24
 
 - Implement a way to disable StatusBar management by DaFunk.
