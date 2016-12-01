@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.16 - 2016-12-01
+
+- Bug fix to String#to_mask when mask greater than value.
+
 ### 0.7.15 - 2016-12-01
 
 - More descriptive ISO8583 exception including field name.
