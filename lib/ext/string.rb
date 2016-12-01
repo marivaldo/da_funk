@@ -3,7 +3,7 @@ class String
     mask_clean = mask_string.chars.reject{|ch| ch.match(/[^0-9A-Za-z]/) }.join
 
     str = mask_string.chars.map{|s| s.match(/[0-9A-Za-z]/) ? "%s" : s }.join
-    str % self.ljust(mask_clean.size, " ").chars
+    (str % self.ljust(mask_clean.size, " ").chars).strip
   end
 
   def chars
