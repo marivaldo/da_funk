@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.17 - 2016-12-13
+
+- Refactoring Magnetic#bin? to check Range/value size to extract digits from track2.
+
 ### 0.7.16 - 2016-12-01
 
 - Bug fix to String#to_mask when mask greater than value.
