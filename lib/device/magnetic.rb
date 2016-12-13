@@ -78,7 +78,7 @@ class Device
       return false if value.to_s.empty?
       tracks if self.read?
 
-      digits = track2.to_s[0..3]
+      digits = extract_digits
       if value.is_a?(Range) && ! digits.empty? && digits.integer?
         value.include? digits.to_f
       else
@@ -87,6 +87,17 @@ class Device
     end
 
     private
+
+    def extract_digits(value)
+      if value.is_a?(Range)
+        total = value.first.to_s.size
+      else #String
+        total = value.size
+      end
+
+      track2.to_s[0..total]
+    end
+
     def read_tracks
       @tracks = adapter.tracks
       @track1 = @tracks[:track1]
