@@ -78,7 +78,7 @@ class Device
       return false if value.to_s.empty?
       tracks if self.read?
 
-      digits = extract_digits
+      digits = extract_digits(value)
       if value.is_a?(Range) && ! digits.empty? && digits.integer?
         value.include? digits.to_f
       else
@@ -94,6 +94,9 @@ class Device
       else #String
         total = value.size
       end
+
+      return "" if total == 0
+      total -= 1
 
       track2.to_s[0..total]
     end
