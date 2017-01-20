@@ -168,7 +168,7 @@ class Device
     #
     # @return [NilClass] Allways returns nil.
     def self.print_big(string)
-      self.size(18, 36, 18, 36)
+      self.size(16, 32, 16, 32)
       self.adapter.print(string)
     end
 
