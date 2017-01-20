@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.7.19 - 2017-01-20
+
+- Change print big size to (16, 32, 16, 23).
+
 ### 0.7.18 - 2016-12-14
 
 - Bug fix tracks digits comparing at Magnetic.
