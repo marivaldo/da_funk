@@ -49,7 +49,7 @@ class Device
 
     class << self
       attr_accessor :timeout, :keys_range, :forward_key, :back_key, :back_key_label,
-        :forward_key_label
+        :forward_key_label, :keys_valid
     end
 
     # Setup Keyboard Map
@@ -92,6 +92,7 @@ class Device
         NINE_NUMBER  + nine_letters, ZERO_NUMBER   + zero_letters
       ]
       @keys_range = {MASK_ALPHA => range_alpha, MASK_LETTERS => range_letters, MASK_NUMBERS => range_number}
+      @keys_valid = range_alpha.flatten.join
 
       self.back_key          = options[:back_key]          || Device::IO::F1
       self.back_key_label    = options[:back_key_label]    || " F1 "
@@ -225,7 +226,7 @@ class Device
       if options[:mode] == IO_INPUT_MONEY || options[:mode] == IO_INPUT_DECIMAL || options[:mode] == IO_INPUT_NUMBERS
         NUMBERS.include?(key)
       elsif options[:mode] != IO_INPUT_NUMBERS && options[:mode] != IO_INPUT_MONEY && options[:mode] != IO_INPUT_DECIMAL
-        true
+        self.keys_valid.include? key
       else
         false
       end
