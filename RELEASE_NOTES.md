@@ -1,5 +1,11 @@
 # DaFunk
 
+### 0.8.0 - 2017-01-26
+
+- Implement white list for IO.get_format inputs.
+- Add a different return for key timeout at IO.get_format.
+- Stable version.
+
 ### 0.7.19 - 2017-01-20
 
 - Change print big size to (16, 32, 16, 23).
