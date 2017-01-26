@@ -144,7 +144,9 @@ class Device
         key = getc
         if key == BACK
           text = text[0..-2]
-        elsif key == ENTER || key == KEY_TIMEOUT
+        elsif key == KEY_TIMEOUT
+          return KEY_TIMEOUT
+        elsif key == ENTER
           return text
         elsif key == CANCEL
           return CANCEL
