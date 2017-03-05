@@ -1,5 +1,11 @@
 # DaFunk
 
+### 0.8.1 - 2017-03-05
+
+- Support CANCEL and TIMEOUT at form and implement default as current value.
+- During ParamsDat application and files update only show outdated ones.
+- Replace Exception by StandardError for ISO8583Exception.
+
 ### 0.8.0 - 2017-01-26
 
 - Implement white list for IO.get_format inputs.
