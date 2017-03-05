@@ -34,6 +34,14 @@ class Device
       true
     end
 
+    def self.outdated_apps
+      self.apps.select{|app| app.outdated? }
+    end
+
+    def self.outdated_files
+      self.files.select{|f| f.outdated? }
+    end
+
     def self.parse_apps
       new_apps = []
       self.file["apps_list"].to_s.gsub("\"", "").split(";").each do |app|
@@ -102,7 +110,7 @@ class Device
           I18n.pt(:downloading_content, :args => ["PARAMS", 1, 1])
           ret = Device::Transaction::Download.request_param_file(FILE_NAME)
           unless check_download_error(ret)
-            sleep(2) 
+            sleep(2)
             false
           else
             true
@@ -116,13 +124,15 @@ class Device
     def self.update_apps(force = false)
       self.download if force || ! self.valid
       if self.valid
-        size_apps = @apps.size
-        @apps.each_with_index do |app, index|
+        apps_to_update = self.outdated_apps
+        size_apps = apps_to_update.size
+        apps_to_update.each_with_index do |app, index|
           self.update_app(app, index+1, size_apps)
         end
 
-        size_files = @files.size
-        @files.each_with_index do |file_, index|
+        files_to_update = self.outdated_files
+        size_files = files_to_update.size
+        files_to_update.each_with_index do |file_, index|
           self.update_file(file_, index+1, size_files)
         end
       end
