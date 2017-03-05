@@ -7,10 +7,10 @@ module DaFunk
     def form(label, options = {})
       Device::Display.clear
       options = form_default(options)
-      default = options.delete(:default)
-      puts "#{label} (#{default}):"
+      options[:value] ||= options.delete(:default)
+      puts "#{label}:"
       string = get_format(options.delete(:min), options.delete(:max), options)
-      return default if string.nil? || string.empty?
+      return options[:value] if string == Device::IO::CANCEL || string == Device::IO::KEY_TIMEOUT
       string
     end
 
