@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.8.2 - 2017-05-12
+
+- Add boot flag to Device::Setting.
+
 ### 0.8.1 - 2017-03-05
 
 - Support CANCEL and TIMEOUT at form and implement default as current value.
