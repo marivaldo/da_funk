@@ -50,6 +50,7 @@ class Device
       "ctls"                        => "",
       "locale"                      => "en",
       "heartbeat"                   => "",
+      "boot"                        => "1",
       "company_name"                => ""
     }
 
