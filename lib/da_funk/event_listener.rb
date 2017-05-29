@@ -15,7 +15,7 @@ module DaFunk
     end
 
     def self.delete(event_listener)
-      self.listeners.delete(self.type)
+      self.listeners.delete(event_listener.type)
     end
 
     def self.add_handler(handler)
