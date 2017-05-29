@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.8.3 - 2017-05-29
+
+- Fix typo in EventListener.delete.
+
 ### 0.8.2 - 2017-05-12
 
 - Add boot flag to Device::Setting.
