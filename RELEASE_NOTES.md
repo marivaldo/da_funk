@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.8.4 - 2017-06-13
+
+- Refactoring status bar management removing interval and increase last 100% png range.
+
 ### 0.8.3 - 2017-05-29
 
 - Fix typo in EventListener.delete.
