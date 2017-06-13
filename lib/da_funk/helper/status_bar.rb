@@ -22,7 +22,7 @@ module DaFunk
         0..29   => "./shared/wifi0.png",
         30..59  => "./shared/wifi30.png",
         60..79  => "./shared/wifi60.png",
-        80..100 => "./shared/wifi100.png"
+        80..200 => "./shared/wifi100.png"
       }
 
       MOBILE_IMAGES = {
@@ -31,11 +31,11 @@ module DaFunk
         21..40  => "./shared/mobile40.png",
         41..60  => "./shared/mobile60.png",
         61..80  => "./shared/mobile80.png",
-        81..100 => "./shared/mobile100.png"
+        81..200 => "./shared/mobile100.png"
       }
 
       class << self
-        attr_accessor :status_timeout, :signal, :battery, :power, :managment
+        attr_accessor :signal, :battery, :power, :managment
       end
 
       def self.check
@@ -91,11 +91,9 @@ module DaFunk
         end
       end
 
-      self.status_timeout ||= Time.now
       self.managment      ||= true
       def self.valid?
-        if self.status_timeout < Time.now && self.managment
-          self.status_timeout = Time.now + STATUS_TIMEOUT
+        if self.managment
           true
         end
       end
