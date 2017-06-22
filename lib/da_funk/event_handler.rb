@@ -16,8 +16,10 @@ module DaFunk
     end
 
     def perform(*parameter)
-      self.schedule_timer
-      @perform_block.call(*parameter)
+      if self.execute?
+        self.schedule_timer
+        @perform_block.call(*parameter)
+      end
     end
 
     def schedule_timer
@@ -31,7 +33,11 @@ module DaFunk
     end
 
     def execute?
-      self.timer < Time.now if self.timer
+      if self.timer
+        self.timer < Time.now
+      else
+        true
+      end
     end
   end
 end
