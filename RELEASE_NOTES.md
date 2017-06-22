@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.8.5 - 2017-06-22
+
+- Bug fix EventHandler timer control.
+
 ### 0.8.4 - 2017-06-13
 
 - Refactoring status bar management removing interval and increase last 100% png range.
