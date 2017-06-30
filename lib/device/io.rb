@@ -177,7 +177,7 @@ class Device
       elsif options[:mode] == Device::IO::IO_INPUT_LETTERS
         Device::IO::MASK_LETTERS
       elsif options[:mode] == Device::IO::IO_INPUT_MASK
-        options[:mask_clean][text.length - 1].match(/[0-9]/) ? Device::IO::MASK_NUMBERS : Device::IO::MASK_LETTERS
+        check_mask(options[:mask_clean].to_s[text.size - 1])
       else
         Device::IO::MASK_ALPHA
       end
@@ -231,6 +231,17 @@ class Device
         self.keys_valid.include? key
       else
         false
+      end
+    end
+
+    def self.check_mask(char)
+      case char
+      when "9"
+        Device::IO::MASK_NUMBERS
+      when "A"
+        Device::IO::MASK_LETTERS
+      else # "a"
+        Device::IO::MASK_ALPHA
       end
     end
   end
