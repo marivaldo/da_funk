@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.8.6 - 2017-06-30
+
+- Support to alpha chars at Device::IO.get_format.
+
 ### 0.8.5 - 2017-06-22
 
 - Bug fix EventHandler timer control.
