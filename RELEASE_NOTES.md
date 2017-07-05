@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.9.0 - 2017-07-05
+
+- ParamsDat.format! support parameter to keep platform bmp images.
+
 ### 0.8.6 - 2017-06-30
 
 - Support to alpha chars at Device::IO.get_format.
