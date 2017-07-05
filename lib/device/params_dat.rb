@@ -138,19 +138,27 @@ class Device
       end
     end
 
-    def self.format!
+    def self.format!(keep_images = false)
       Device::Application.delete(self.apps)
       DaFunk::FileParameter.delete(self.files)
       File.delete(FILE_NAME) if exists?
-      @apps = []
-      @files = []
+      @apps, @files = [], []
       Dir.entries("./shared/").each do |f|
         begin
           path = "./shared/#{f}"
-          File.delete(path) if File.file?(path) && f != Device::Display::MAIN_BMP
+          File.delete(path) if self.file_deletable?(path, keep_images)
         rescue
         end
       end
+    end
+
+    def self.file_deletable?(path, keep_images)
+      keep = false
+      if keep_images
+        keep = [".bmp", ".jpeg", ".jpg", ".png"].find {|ext| path.include?(ext) && path.include?(Device::System.model) }
+        keep = path.include?(Device::Display::MAIN_BMP)
+      end
+      File.file?(path) && ! keep
     end
 
     def self.update_app(application, index = 1, all = 1, force = false)
