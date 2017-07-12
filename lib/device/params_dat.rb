@@ -138,7 +138,7 @@ class Device
       end
     end
 
-    def self.format!(keep_images = false)
+    def self.format!(keep_config_files = false, keep_files = [])
       Device::Application.delete(self.apps)
       DaFunk::FileParameter.delete(self.files)
       File.delete(FILE_NAME) if exists?
@@ -146,17 +146,18 @@ class Device
       Dir.entries("./shared/").each do |f|
         begin
           path = "./shared/#{f}"
-          File.delete(path) if self.file_deletable?(path, keep_images)
+          File.delete(path) if self.file_deletable?(path, keep_config_files, keep_files)
         rescue
         end
       end
     end
 
-    def self.file_deletable?(path, keep_images)
+    def self.file_deletable?(path, keep_config_files, keep_files)
       keep = false
-      if keep_images
+      if keep_config_files
         keep = [".bmp", ".jpeg", ".jpg", ".png"].find {|ext| path.include?(ext) && path.include?(Device::System.model) }
-        keep = path.include?(Device::Display::MAIN_BMP)
+        keep ||= path.include?(Device::Display::MAIN_BMP)
+        keep ||= keep_files.include?(path)
       end
       File.file?(path) && ! keep
     end
