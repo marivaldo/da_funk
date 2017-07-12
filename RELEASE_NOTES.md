@@ -1,5 +1,9 @@
 # DaFunk
 
+### 0.9.1 - 2017-07-12
+
+- Fix file deletable check and extra parameters for additional files at ParamsDat.format!.
+
 ### 0.9.0 - 2017-07-05
 
 - ParamsDat.format! support parameter to keep platform bmp images.

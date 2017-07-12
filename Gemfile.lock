@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    da_funk (0.9.0)
+    da_funk (0.9.1)
       bundler (~> 1.7)
       cloudwalk_handshake (~> 0.6)
       funky-emv (~> 0.3)
@@ -29,3 +29,6 @@ DEPENDENCIES
   da_funk!
   funky-simplehttp (~> 0.2)
   yard (~> 0.8)
+
+BUNDLED WITH
+   1.15.1
