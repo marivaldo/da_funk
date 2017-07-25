@@ -1,5 +1,10 @@
 # DaFunk
 
+### 0.9.2 - 2017-07-25
+
+- Refactoring Network.configured? fixing the return which must be a bool.
+- Create Device::Setting.wifi_password and Device::Setting.apn_password.
+
 ### 0.9.1 - 2017-07-12
 
 - Fix file deletable check and extra parameters for additional files at ParamsDat.format!.
