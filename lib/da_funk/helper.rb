@@ -18,11 +18,13 @@ module DaFunk
       Device::Display.clear
       if Device::Network.configured?
         I18n.pt(:attach_connecting)
-        if Device::Network.connected? < 0
-          if (ret = Device::Network.attach) == 0
+        unless Device::Network.connected?
+          if Device::Network.attach == Device::Network::SUCCESS
+            Device::Setting.network_configured = 1
             I18n.pt(:attach_connected)
           else
-            I18n.pt(:attach_fail, :args => [ret.to_s])
+            Device::Setting.network_configured = 0
+            I18n.pt(:attach_fail, :args => [Device::Network.code.to_s])
             getc(4000)
             return false
           end

@@ -41,7 +41,7 @@ class Device
     end
 
     def self.start
-      if create_fiber? && Device::Network.connected? == Device::Network::SUCCESS
+      if create_fiber? && Device::Network.connected?
         unless Device::Notification.current && Device::Notification.current.closed?
           self.new(*self.config)
         end
@@ -74,7 +74,7 @@ class Device
     # Check if there is any notification
     def check
       # TODO check if should execute this(because of connection exception)
-      if valid_check_interval? && Device::Network.connected? == Device::Network::SUCCESS
+      if valid_check_interval? && Device::Network.connected?
         if @fiber.alive?
           if (notification = @fiber.resume)
             Notification.execute(NotificationEvent.new(notification))

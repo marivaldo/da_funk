@@ -69,7 +69,11 @@ class CommandLinePlatform
     end
 
     def self.connected?
-      1
+      true
+    end
+
+    def self.code
+      Device::Network::SUCCESS
     end
 
     def self.signal

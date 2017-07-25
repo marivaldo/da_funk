@@ -40,9 +40,10 @@ class Device
     #AUTH_WPA_WPA2_EAP   = "wpa_wpa2_eap"
 
     class << self
-      attr_accessor :type, :apn, :user, :password, :socket
+      attr_accessor :type, :apn, :user, :password, :socket, :code
     end
 
+    self.code = NO_CONNECTION
     self.socket = Proc.new do |avoid_handshake|
       sock = TCPSocket.new Device::Setting.host, Device::Setting.host_port
       sock.connect(avoid_handshake)
@@ -69,9 +70,12 @@ class Device
       if self.adapter.started? ||
         (self.configured? && Device::Network.init(*self.config) == SUCCESS)
 
-        return adapter.connected?
+        self.code = adapter.connected?
+
+        return self.code == Device::Network::SUCCESS
       end
-      NO_CONNECTION
+      self.code = NO_CONNECTION
+      false
     end
 
     def self.configured?
@@ -96,7 +100,7 @@ class Device
     #
     # @return [Fixnum] Signal value between 0 and 5.
     def self.signal
-      if self.connected? == 0
+      if self.connected?
         adapter.signal
       end
     end
@@ -144,28 +148,27 @@ class Device
     end
 
     def self.attach
-      ret = Device::Network.connected?
-      if ret != SUCCESS
-        ret = Device::Network.init(*self.config)
-        ret = Device::Network.connect
-        ret = Device::Network.connected? if ret != SUCCESS
+      Device::Network.connected?
+      if self.code != SUCCESS
+        self.code = Device::Network.init(*self.config)
+        self.code = Device::Network.connect
+        Device::Network.connected? if self.code != SUCCESS
 
         hash = try_user do |process|
-          process[:ret] = Device::Network.connected?
+          Device::Network.connected?
+          process[:ret] = self.code
           process[:ret] == PROCESSING # if true keep trying
         end
-        ret = hash[:ret]
+        self.code = hash[:ret]
 
-        if ret == SUCCESS
-          ret = Device::Network.dhcp_client(20000) if (wifi? || ethernet?)
-          Device::Setting.network_configured = 1
+        if self.code == SUCCESS
+          self.code = Device::Network.dhcp_client(20000) if (wifi? || ethernet?)
         else
-          ret = ERR_USER_CANCEL if hash[:key] == Device::IO::CANCEL
-          Device::Setting.network_configured = 0
+          self.code = ERR_USER_CANCEL if hash[:key] == Device::IO::CANCEL
           Device::Network.disconnect
         end
       end
-      ret
+      self.code
     end
 
     def self.config
