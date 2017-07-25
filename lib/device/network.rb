@@ -118,8 +118,8 @@ class Device
     #   end
     #   selected = menu("Select SSID:", selection)
     #
-    #   Device::Setting.password       = form("Password",
-    #     :min => 0, :max => 127, :default => Device::Setting.password)
+    #   Device::Setting.wifi_password  = form("Password",
+    #     :min => 0, :max => 127, :default => Device::Setting.wifi_password)
     #   Device::Setting.authentication = selected[:authentication]
     #   Device::Setting.essid          = selected[:essid]
     #   Device::Setting.channel        = selected[:channel]
@@ -182,19 +182,19 @@ class Device
         {
           apn:      Device::Setting.apn,
           user:     Device::Setting.user,
-          password: Device::Setting.password
+          password: Device::Setting.apn_password
         }
       elsif wifi?
         {
           authentication: Device::Setting.authentication,
-          password:       Device::Setting.password,
+          password:       Device::Setting.wifi_password,
           essid:          Device::Setting.essid,
           channel:        Device::Setting.channel,
           cipher:         Device::Setting.cipher,
           mode:           Device::Setting.mode
         }
       elsif ethernet?
-        Hash.new
+        Hash.new # TODO
       end
     end
 
